@@ -1,0 +1,26 @@
+name: Contextos
+run-name: ¡Estoy aprendiendo a usar Contextos!
+on:
+  workflow_dispatch:
+    inputs:
+      edad:
+        description: 'Edad'
+        required: true
+        type: integer
+      nombre:
+        description: 'Tu nombre'
+        required: true
+        default: 'Juan'
+        type: string
+jobs:
+  Contexto-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo env
+        run: echo "${{ env.var1 }} ${{ env.var2}} ${{ env.var3}}"
+  Contexto-github:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo $GITHUB_REF"
+        run: echo "Desplegando en la rama $GITHUB_REF"
